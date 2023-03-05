@@ -379,7 +379,7 @@ io.on("connection", (socket) => {
       );
       setTimeout(() => {
         io.to(game.pin).emit("newTable", rounds[0]);
-      }, 500);
+      }, 2000);
       console.log(players.players);
       game.gameData.questionLive = true;
     } else {
