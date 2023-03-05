@@ -104,6 +104,21 @@
     text-align: center;
     display: none;
 }
+#winner6{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: none;
+}
+#winner7{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: none;
+}
+#winner8{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    display: none;
+}
 #winnerTitle{
     text-align: center;
     font-family: 'Raleway', sans-serif;

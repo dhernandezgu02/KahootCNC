@@ -1,19 +1,31 @@
 html, body { height: 90%; padding: 0; margin: 0; }
-button{
-    width: 50%; height: 50%; float: left;
-}
-#answer1{
-    background-color: #4CAF50;
-}
-#answer2{
-    background-color: #f94a1e;
-}
-#answer3{
-    background-color: #3399ff;
-}
-#answer4{
-    background-color: #ff9933;
-}
+button {
+    width: 100px; /* Ancho fijo */
+    height: 50px; /* Altura fija */
+    margin-right: 10px; /* Agregar un margen derecho entre los botones */
+    font-size: 16px; /* Tamaño de fuente para todos los botones */
+    border: none; /* Eliminar el borde de los botones */
+    border-radius: 5px; /* Agregar esquinas redondeadas a los botones */
+    cursor: pointer; /* Cambiar el cursor cuando se pasa por encima del botón */
+  }
+  
+  /* Establecer un estilo específico para cada botón individual */
+  #answer1 {
+    background-color: #4CAF50; /* Fondo verde */
+    color: white; /* Texto blanco */
+  }
+  #answer2 {
+    background-color: #f94a1e; /* Fondo naranja */
+    color: white; /* Texto blanco */
+  }
+  #answer3 {
+    background-color: #3399ff; /* Fondo azul */
+    color: white; /* Texto blanco */
+  }
+  #answer4 {
+    background-color: #ff9933; /* Fondo amarillo */
+    color: white; /* Texto blanco */
+  }
 
 #buttons{
     text-align: center;

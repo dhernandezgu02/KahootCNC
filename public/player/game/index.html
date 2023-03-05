@@ -1,26 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Game | KahootClone</title>
-        <link rel = "stylesheet" href = "../../css/playerGameView.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    </head>
-    <body>
-        <div id = "stats">
-            <h4 id = "nameText">Name: </h4>
-            <h4 id = "scoreText">Score: </h4>
-            <h4 id = "rankText"></h4>
-        </div>
-        <h2 id = "message"></h2>
-        <button onclick = "answerSubmitted(1)" id = "answer1" class = "button"></button>
-        <button onclick = "answerSubmitted(2)" id = "answer2" class = "button"></button>
-        <br>
-        <button onclick = "answerSubmitted(3)" id = "answer3" class = "button"></button>
-        <button onclick = "answerSubmitted(4)" id = "answer4" class = "button"></button>
-        <script src = "../../socket.io/socket.io.js"></script>
-        <script src = "../../js/libs/jqueryLibrary.js"></script>
-        <script src = "../../js/libs/deparam.js"></script>
-        <script src = "../../js/playerGame.js"></script>
-    </body>
+
+<head>
+    <title>Juego Inversiones</title>
+    <link rel="stylesheet" href="../../css/playerGameView.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <h1><b>Juego de Inversiones</b></h1>
+    <div id="stats">
+        <h4 id="nameText">Nombre_: </h4>
+        <h4 id="scoreText">Puntaje: </h4>
+        <h4 id="rankText"></h4>
+    </div>
+    <div id="main-container"></div>
+    <div class="container">
+        <div id="tablaComparaciones"></div>
+    </div>
+
+    <!-- Agrega los scripts de jQuery y Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <div id="table-container">
+        <table class="table" id="tablaComparaciones">
+            <!-- <h2><b>Tabla Comparacion</b></h2> -->
+        </table>
+
+        <table class="table" id="tablaInvest">
+        </table>
+
+        <table class="table" id="tablaPayments">
+        </table>
+    </div>
+
+    <h2 id="message"></h2>
+    <button onclick="answerSubmitted(0)" id="answer0" class="button">Portafolio 0</button>
+    <button onclick="answerSubmitted(1)" id="answer1" class="button">Portafolio 1</button>
+    <br>
+    <button onclick="answerSubmitted(2)" id="answer2" class="button">Portafolio 2</button>
+    <button onclick="answerSubmitted(3)" id="answer3" class="button">Portafolio 3</button>
+    <br>
+    <button onclick="answerSubmitted(4)" id="answer4" class="button">Portafolio 4</button>
+    <button onclick="answerSubmitted(5)" id="answer5" class="button">Portafolio 5</button>
+    <script src="../../socket.io/socket.io.js"></script>
+    <script src="../../js/libs/jqueryLibrary.js"></script>
+    <script src="../../js/libs/deparam.js"></script>
+    <script src="../../js/playerGame.js"></script>
+
+</body>
+
 </html>
