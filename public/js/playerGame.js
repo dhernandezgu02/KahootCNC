@@ -75,6 +75,7 @@ socket.on("questionOver", function (data) {
 
 socket.on("newScore", function (data) {
   document.getElementById("scoreText").innerHTML = "Score: " + data;
+  // console.log(data);
 });
 socket.on("newTable", function (currentRound) {
   // Crea la tabla con las clases de Bootstrap
@@ -149,17 +150,18 @@ socket.on("newTable", function (currentRound) {
   // Agrega la tabla al elemento div en el archivo HTML
   var tablaComparacionesDiv = document.getElementById("tablaComparaciones");
   tablaComparacionesDiv.innerHTML = ""; // Limpiar tablas antiguas
+  tituloTabla.textContent = "";
   tablaComparacionesDiv.appendChild(tablaComparaciones);
 
   //AGREGAR TABLA INVEST
 
   var tablaInvest = document.createElement("table");
-  tablaInvest.classList.add("table", "table-striped", "table-bordered");
+  tablaInvest.classList.add("table", "table-striped", "table-bordered"); // Agrega las clases de Bootstrap a la tabla
 
   // Crea el título de la tabla con la clase de Bootstrap
-  var tituloTabla = document.createElement("h2");
-  tituloTabla.classList.add("mb-3");
-  tituloTabla.textContent = "Opciones de Inversion";
+  var tituloTablaInvest = document.createElement("h2");
+  tituloTablaInvest.classList.add("mb-3");
+  tituloTablaInvest.textContent = "Opciones de Inversión";
 
   // Crea una fila para los encabezados de la tabla de invest
   var headerRowInvest = document.createElement("tr");
@@ -167,6 +169,7 @@ socket.on("newTable", function (currentRound) {
 
   // Crea un encabezado para la columna "Fondo"
   var fondoHeaderInvest = document.createElement("th");
+  fondoHeaderInvest.classList.add("text-center");
   fondoHeaderInvest.textContent = "Fondo";
   headerRowInvest.appendChild(fondoHeaderInvest);
 
@@ -231,9 +234,19 @@ socket.on("newTable", function (currentRound) {
     tablaInvest.appendChild(inVestRow);
   }
 
+  var tablaContainerInvest = document.createElement("div");
+  tablaContainerInvest.classList.add("container", "my-5");
+  tablaContainerInvest.appendChild(tablaInvest);
+  tablaContainerInvest.appendChild(tituloTablaInvest);
+
+  // Agrega el contenedor al DOM
+  var mainContainerInvest = document.getElementById("main-container");
+  mainContainerInvest.appendChild(tablaContainerInvest);
+
   // Agrega la tabla al elemento div en el archivo HTML
   var tablaInvestDiv = document.getElementById("tablaInvest");
   tablaInvestDiv.innerHTML = ""; // Limpiar tablas antiguas
+  tituloTablaInvest.textContent = "";
   tablaInvestDiv.appendChild(tablaInvest);
 
   var tablaPayments = document.createElement("table");

@@ -379,8 +379,8 @@ io.on("connection", (socket) => {
       );
       setTimeout(() => {
         io.to(game.pin).emit("newTable", rounds[0]);
-      }, 2000);
-      console.log(players.players);
+      }, 3000);
+      // console.log(players.players);
       game.gameData.questionLive = true;
     } else {
       socket.emit("noGameFound"); //No game was found, redirect user
@@ -507,7 +507,6 @@ io.on("connection", (socket) => {
 
       player.gameData.answer = num;
       game.gameData.playersAnswered += 1;
-
       var gameQuestion = game.gameData.question;
       var gameid = game.gameData.gameid;
 
@@ -524,7 +523,7 @@ io.on("connection", (socket) => {
             var correctAnswer = res[0].questions[gameQuestion - 1].correct;
             //Checks player answer with correct answer
             if (num == correctAnswer) {
-              player.gameData.score += 100;
+              // player.gameData.score += 100;
               io.to(game.pin).emit("getTime", socket.id);
               socket.emit("answerResult", true);
             }
@@ -550,6 +549,7 @@ io.on("connection", (socket) => {
 
   socket.on("getScore", function () {
     var player = players.getPlayer(socket.id);
+    console.log("Get score", player.name, player.gameData.score);
     socket.emit("newScore", player.gameData.score);
   });
 
@@ -558,7 +558,7 @@ io.on("connection", (socket) => {
     time = time * 100;
     var playerid = data.player;
     var player = players.getPlayer(playerid);
-    player.gameData.score += time;
+    // player.gameData.score += time;
   });
 
   socket.on("timeUp", function () {
@@ -640,7 +640,7 @@ io.on("connection", (socket) => {
             var topFivePlayers = playersInGame.slice(0, 8);
 
             var playerNames = topFivePlayers.map(function (player) {
-              return player.name;
+              return player.name + ": " + player.gameData.score;
             });
 
             io.to(game.pin).emit("GameOver", {
