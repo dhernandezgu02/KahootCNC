@@ -504,7 +504,6 @@ io.on("connection", (socket) => {
       console.log("Jugador ", player.name, randomNumber, player.gameData.score);
 
       //if the question is still live
-
       player.gameData.answer = num;
       game.gameData.playersAnswered += 1;
       var gameQuestion = game.gameData.question;
@@ -530,9 +529,9 @@ io.on("connection", (socket) => {
 
             //Checks if all players answered
             if (game.gameData.playersAnswered == playerNum.length) {
-              game.gameData.questionLive = false; //Question has been ended bc players all answered under time
               var playerData = players.getPlayers(game.hostId);
               io.to(game.pin).emit("questionOver", playerData, correctAnswer); //Tell everyone that question is over
+              game.gameData.questionLive = false; //Question has been ended bc players all answered under time
             } else {
               //update host screen of num players answered
               io.to(game.pin).emit("updatePlayersAnswered", {
@@ -582,7 +581,7 @@ io.on("connection", (socket) => {
           var correctAnswer = res[0].questions[gameQuestion - 1].correct;
           io.to(game.pin).emit("questionOver", playerData, correctAnswer);
 
-          db.close();
+          db.close(); // Se cerró la conexión aquí, después de haber obtenido los datos necesarios de la base de datos
         });
     });
   });
