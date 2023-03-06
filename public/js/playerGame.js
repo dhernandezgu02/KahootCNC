@@ -248,7 +248,7 @@ socket.on("newTable", function (currentRound) {
   tablaInvestDiv.innerHTML = ""; // Limpiar tablas antiguas
   tituloTablaInvest.textContent = "";
   tablaInvestDiv.appendChild(tablaInvest);
-
+  //////////////////////////////////////////////////////////////////////////
   var tablaPayments = document.createElement("table");
   tablaPayments.classList.add("table");
 
@@ -256,7 +256,12 @@ socket.on("newTable", function (currentRound) {
   var headerRowPayments = document.createElement("tr");
   headerRowPayments.classList.add("table-header");
 
-  // Crea un encabezado para cada columna de la tabla de payments
+  // Crea un encabezado para la primera columna de la tabla de payments
+  var firstHeaderPayments = document.createElement("th");
+  firstHeaderPayments.textContent = "Ganancias/Perdidas";
+  headerRowPayments.appendChild(firstHeaderPayments);
+
+  // Crea un encabezado para cada columna restante de la tabla de payments
   var aHeaderPayments = document.createElement("th");
   aHeaderPayments.textContent = "0";
   headerRowPayments.appendChild(aHeaderPayments);
@@ -289,6 +294,16 @@ socket.on("newTable", function (currentRound) {
 
     var paymentsRow = document.createElement("tr");
 
+    // Agrega la celda para la primera columna
+    var firstCell = document.createElement("td");
+    if (l == 0) {
+      firstCell.textContent = "Ganancias";
+    } else if (l == 1) {
+      firstCell.textContent = "Perdidas";
+    }
+    paymentsRow.appendChild(firstCell);
+
+    // Agrega las celdas para las columnas restantes
     var aCell = document.createElement("td");
     aCell.textContent = payments["0"];
     paymentsRow.appendChild(aCell);
