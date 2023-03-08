@@ -474,7 +474,7 @@ io.on("connection", (socket) => {
   //   }
   // });
 
-  const socket = io.connect(SERVER_URL, {
+  socket.io.connect(SERVER_URL, {
     reconnection: true, // Habilita la reconexión
     reconnectionAttempts: 10, // Número máximo de intentos de reconexión
     reconnectionDelay: 1000, // Tiempo de espera antes del primer intento de reconexión
