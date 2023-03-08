@@ -12,6 +12,7 @@ const publicPath = path.join(__dirname, "../public");
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+// const io = require("socket.io")(server);
 var games = new LiveGames();
 var players = new Players();
 
@@ -474,12 +475,12 @@ io.on("connection", (socket) => {
   //   }
   // });
 
-  socket.io.connect(SERVER_URL, {
-    reconnection: true, // Habilita la reconexión
-    reconnectionAttempts: 10, // Número máximo de intentos de reconexión
-    reconnectionDelay: 1000, // Tiempo de espera antes del primer intento de reconexión
-    timeout: 5000, // Tiempo máximo permitido para intentar la conexión
-  });
+  // socket.io.connect(SERVER_URL, {
+  //   reconnection: true, // Habilita la reconexión
+  //   reconnectionAttempts: 10, // Número máximo de intentos de reconexión
+  //   reconnectionDelay: 1000, // Tiempo de espera antes del primer intento de reconexión
+  //   timeout: 5000, // Tiempo máximo permitido para intentar la conexión
+  // });
 
   //Sets data in player class to answer from player
   socket.on("playerAnswer", function (num) {
