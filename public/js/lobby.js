@@ -14,7 +14,7 @@ socket.on("noGameFound", function () {
 });
 //If the host disconnects, then the player is booted to main screen
 socket.on("hostDisconnect", function () {
-  window.location.href = "../";
+  // window.location.href = "../";
 });
 
 //When the host clicks start game, the player screen changes

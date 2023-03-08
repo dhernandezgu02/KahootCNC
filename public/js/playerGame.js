@@ -352,7 +352,7 @@ socket.on("nextQuestionPlayer", function (currentRound) {
 });
 
 socket.on("hostDisconnect", function () {
-  window.location.href = "../../";
+  // window.location.href = "../../";
 });
 
 socket.on("playerGameData", function (data) {
