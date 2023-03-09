@@ -12,15 +12,17 @@
 </head>
 
 <body>
-    <h1><b>Juego de Inversiones</b></h1>
+    <h1 class="title"><b>Juego de Inversiones</b></h1>
     <div id="stats">
-        <h4 id="nameText">Nombre_: </h4>
-        <h4 id="scoreText">Puntaje: </h4>
-        <h4 id="rankText"></h4>
+        <h4 class="title_data" id="nameText"><b>Nombre: </b> </h4>
+        <h4 class="title_data" id="scoreText"><b>Score: </b></h4>
+        <h4 class="title_data" id="rankText">Probabilidad de bancarrota: </h4>
+        <h4 class="title_data" id="timePlayer">Tiempo: </h4>
+
     </div>
     <div id="main-container"></div>
     <div class="container">
-        <div id="tablaComparaciones"></div>
+        <!-- <div id="tablaComparaciones"></div> -->
     </div>
 
     <!-- Agrega los scripts de jQuery y Bootstrap JS -->
@@ -30,26 +32,35 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <div id="table-container">
-        <table class="table" id="tablaComparaciones">
-            <!-- <h2><b>Tabla Comparacion</b></h2> -->
-        </table>
+        <div class="tablaComparaciones">
+            <h2><b>Tabla Comparaciones</b></h2>
+            <table class="table" id="tablaComparaciones">
+            </table>
+        </div>
+        <div class="tablaInvest">
+            <h2><b>Opciones de Inversion</b></h2>
+            <table class="table" id="tablaInvest">
+            </table>
+        </div>
+        <div class="tablaPayments">
+            <h2><b>Tabla de Pagos</b></h2>
+            <table class="table" id="tablaPayments">
+            </table>
+        </div>
 
-        <table class="table" id="tablaInvest">
-        </table>
-
-        <table class="table" id="tablaPayments">
-        </table>
     </div>
-
-    <h2 id="message"></h2>
-    <button onclick="answerSubmitted(0)" id="answer0" class="button">Portafolio 0</button>
-    <button onclick="answerSubmitted(1)" id="answer1" class="button">Portafolio 1</button>
-    <br>
-    <button onclick="answerSubmitted(2)" id="answer2" class="button">Portafolio 2</button>
-    <button onclick="answerSubmitted(3)" id="answer3" class="button">Portafolio 3</button>
-    <br>
-    <button onclick="answerSubmitted(4)" id="answer4" class="button">Portafolio 4</button>
-    <button onclick="answerSubmitted(5)" id="answer5" class="button">Portafolio 5</button>
+    <div class="div_buttons">
+        <h2><b>Seleccion un portafolio: </b></h2>
+        <h2 id="message"></h2>
+        <button onclick="answerSubmitted(0)" id="answer0" class="button">Portafolio 0</button>
+        <button onclick="answerSubmitted(1)" id="answer1" class="button">Portafolio 1</button>
+        <br>
+        <button onclick="answerSubmitted(2)" id="answer2" class="button">Portafolio 2</button>
+        <button onclick="answerSubmitted(3)" id="answer3" class="button">Portafolio 3</button>
+        <br>
+        <button onclick="answerSubmitted(4)" id="answer4" class="button">Portafolio 4</button>
+        <button onclick="answerSubmitted(5)" id="answer5" class="button">Portafolio 5</button>
+    </div>
     <script src="../../socket.io/socket.io.js"></script>
     <script src="../../js/libs/jqueryLibrary.js"></script>
     <script src="../../js/libs/deparam.js"></script>

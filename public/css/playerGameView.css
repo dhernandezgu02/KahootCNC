@@ -1,31 +1,52 @@
 html, body { height: 90%; padding: 0; margin: 0; }
-button {
-    width: 100px; /* Ancho fijo */
-    height: 50px; /* Altura fija */
-    margin-right: 10px; /* Agregar un margen derecho entre los botones */
-    font-size: 16px; /* Tamaño de fuente para todos los botones */
-    border: none; /* Eliminar el borde de los botones */
-    border-radius: 5px; /* Agregar esquinas redondeadas a los botones */
-    cursor: pointer; /* Cambiar el cursor cuando se pasa por encima del botón */
-  }
-  
-  /* Establecer un estilo específico para cada botón individual */
-  #answer1 {
-    background-color: #4CAF50; /* Fondo verde */
-    color: white; /* Texto blanco */
-  }
-  #answer2 {
-    background-color: #f94a1e; /* Fondo naranja */
-    color: white; /* Texto blanco */
-  }
-  #answer3 {
-    background-color: #3399ff; /* Fondo azul */
-    color: white; /* Texto blanco */
-  }
-  #answer4 {
-    background-color: #ff9933; /* Fondo amarillo */
-    color: white; /* Texto blanco */
-  }
+.button {
+  /* display: flex; */
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 40%;
+}
+
+/* Establecer un estilo específico para cada botón individual */
+#answer1 {
+  background-color: #3498DB; /* Gris claro */
+  color: #ffffff; /* Texto oscuro */
+}
+
+#answer2 {
+  background-color: #3498DB; /* Amarillo dorado */
+  color: #fff; /* Texto blanco */
+}
+
+#answer3 {
+  background-color: #3498DB; /* Azul claro */
+  color: #fff; /* Texto blanco */
+
+}
+
+#answer4 {
+  background-color: #3498DB; /* Violeta oscuro */
+  color: #fff; /* Texto blanco */
+
+}
+#answer5 {
+  background-color: #3498DB; /* Violeta oscuro */
+  color: #fff; /* Texto blanco */
+}
+#answer0 {
+  background-color: #3498DB; /* Violeta oscuro */
+  color: #fff; /* Texto blanco */
+}
+
+/* Establecer un estilo cuando se pasa el mouse por encima de los botones */
+button:hover {
+  transform: translateY(-5px); /* Agregar una animación de elevación suave */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Agregar sombra suave */
+}
 
 #buttons{
     text-align: center;
@@ -43,3 +64,107 @@ button {
     text-align: center;
     font-size: 35px;
 }
+
+
+#tablaComparaciones{
+  /* border: 1px solid; */
+  width: 100%;
+  margin: 0 auto; /* centrar la tabla horizontalmente */
+  text-align: center; /* alinear la tabla a la izquierda */
+  font-size: 14px; 
+  float: left;
+  margin-right: 20px;
+}
+#tablaInvest{
+  /* border: 1px solid; */
+  width: 100%;
+  margin: 0 auto; /* centrar la tabla horizontalmente */
+  text-align: center; /* alinear la tabla a la izquierda */
+  font-size: 14px; 
+  float: left;
+  margin-left: 20px;
+}
+
+#tablaPayments{
+  width: 100%;
+  text-align: left; 
+  font-size: 14px;
+  margin: 0 auto;
+  border-collapse: collapse; 
+  }
+  
+  #tablaPayments th {
+  background-color: #f2f2f2; 
+  color: #333; 
+  font-weight: bold; 
+  padding: 8px; 
+  }
+  
+  #tablaPayments td {
+  padding: 8px; 
+  border-bottom: 1px solid #ddd;
+  }
+  
+  #tablaPayments tr:nth-child(even) {
+  background-color: #f2f2f2; /* alternar colores de fondo para filas pares */
+  }
+
+  .tablaComparaciones{
+
+    width: 45%;
+    text-align: center; /* alinear la tabla a la izquierda */
+    font-size: 14px; 
+    float: left;
+    margin-left: 140px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px #ccc;
+  }
+  .tablaInvest{
+    /* border: 1px solid; */
+    width: 45%;
+    text-align: center; /* alinear la tabla a la izquierda */
+    font-size: 14px; 
+    float: left;
+    /* margin-right: 130px; */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px #ccc;
+  }
+  
+  .tablaPayments{
+    width: 50%;
+    text-align: center; 
+    font-size: 14px;
+    margin: 0 auto;
+    border-collapse: collapse; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px #ccc;
+    }
+
+    .title{
+      margin-top: 30px;
+      font-size: 36px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 1px #ccc;
+    }
+    .title_data{
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 1px #ccc;
+      font-weight: 600;
+    }
+
+    .div_buttons{
+      margin-top: 100px;
+      /* border: 1px solid; */
+      width: 40%;
+      margin: auto;
+      text-align: center;
+    }

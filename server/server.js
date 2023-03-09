@@ -34,6 +34,21 @@ server.listen(3000, () => {
 0	40	160	200	320	40
 */
 
+const getPlayerRanking = (hostId) => {
+  var playersInGame = players.getPlayers(hostId);
+
+  playersInGame.sort(function (a, b) {
+    return b.gameData.score - a.gameData.score;
+  });
+
+  var topFivePlayers = playersInGame.slice(0, 8);
+
+  var playerNames = topFivePlayers.map(function (player) {
+    return player.name + ": " + player.gameData.score;
+  });
+  return playerNames;
+};
+
 const rounds = [
   {
     bankRuptProbability: 0.42,
@@ -379,7 +394,7 @@ io.on("connection", (socket) => {
         rounds[0]
       );
       setTimeout(() => {
-        io.to(game.pin).emit("newTable", rounds[0]);
+        io.to(game.pin).emit("newTable", rounds[0], 58);
       }, 3000);
       // console.log(players.players);
       game.gameData.questionLive = true;
@@ -498,16 +513,18 @@ io.on("connection", (socket) => {
         player.gameData.score,
         num
       );
-      if (
-        randomNumber < rounds[game.gameData.question - 1].bankRuptProbability
-      ) {
-        player.gameData.score -=
-          rounds[game.gameData.question - 1].portFolios[+num].loose;
-        player.gameData.isBankRupt = true;
-      } else {
-        player.gameData.score +=
-          rounds[game.gameData.question - 1].portFolios[+num].win;
-        player.gameData.isBankRupt = false;
+      if (game.gameData.question > 1) {
+        if (
+          randomNumber < rounds[game.gameData.question - 1].bankRuptProbability
+        ) {
+          player.gameData.score -=
+            rounds[game.gameData.question - 1].portFolios[+num].loose;
+          player.gameData.isBankRupt = true;
+        } else {
+          player.gameData.score +=
+            rounds[game.gameData.question - 1].portFolios[+num].win;
+          player.gameData.isBankRupt = false;
+        }
       }
       console.log("Jugador ", player.name, randomNumber, player.gameData.score);
 
@@ -538,7 +555,13 @@ io.on("connection", (socket) => {
             //Checks if all players answered
             if (game.gameData.playersAnswered == playerNum.length) {
               var playerData = players.getPlayers(game.hostId);
-              io.to(game.pin).emit("questionOver", playerData, correctAnswer); //Tell everyone that question is over
+              const playerRanking = getPlayerRanking(game.hostId);
+              io.to(game.pin).emit(
+                "questionOver",
+                playerData,
+                correctAnswer,
+                playerRanking
+              ); //Tell everyone that question is over
               game.gameData.questionLive = false; //Question has been ended bc players all answered under time
             } else {
               //update host screen of num players answered
@@ -587,7 +610,13 @@ io.on("connection", (socket) => {
         .toArray(function (err, res) {
           if (err) throw err;
           var correctAnswer = res[0].questions[gameQuestion - 1].correct;
-          io.to(game.pin).emit("questionOver", playerData, correctAnswer);
+          const playerRanking = getPlayerRanking(game.hostId);
+          io.to(game.pin).emit(
+            "questionOver",
+            playerData,
+            correctAnswer,
+            playerRanking
+          );
 
           db.close(); // Se cerró la conexión aquí, después de haber obtenido los datos necesarios de la base de datos
         });
@@ -668,7 +697,8 @@ io.on("connection", (socket) => {
       "nextQuestionPlayer",
       rounds[game.gameData.question - 1]
     );
-    io.to(game.pin).emit("newTable", rounds[game.gameData.question - 1]);
+    const playerRanking = getPlayerRanking(game.hostId);
+    io.to(game.pin).emit("newTable", rounds[game.gameData.question - 1], 60);
   });
 
   //When the host starts the game

@@ -6,6 +6,23 @@ var score = 0;
 
 var params = jQuery.deparam(window.location.search); //Gets the id from url
 
+let time = 60;
+let timer = null;
+
+function updateTimer(initialTime) {
+  if (timer) {
+    clearInterval(timer);
+  }
+  time = initialTime || 60;
+  timer = setInterval(function () {
+    time -= 1;
+    document.getElementById("timePlayer").textContent = "Tiempo: " + time;
+    // if (time == 0) {
+    //   socket.emit("timeUp");
+    // }
+  }, 1000);
+}
+
 socket.on("connect", function () {
   //Tell server that it is host connection from game view
   socket.emit("player-join-game", params);
@@ -48,7 +65,7 @@ socket.on("answerResult", function (data) {
   }
 });
 
-socket.on("questionOver", function (data) {
+socket.on("questionOver", function (data, _, playerRanking) {
   console.log(data);
   console.log(document.getElementById("nameText").innerHTML);
   const [, name] = document.getElementById("nameText").innerHTML.split(": ");
@@ -71,13 +88,68 @@ socket.on("questionOver", function (data) {
   document.getElementById("answer4").style.visibility = "hidden";
   document.getElementById("answer5").style.visibility = "hidden";
   socket.emit("getScore");
+  const modalElement = document.createElement("div");
+  modalElement.classList.add("global-modal");
+  modalElement.style.position = "absolute";
+  modalElement.style.height = "100vh";
+  modalElement.style.width = "100vw";
+  modalElement.style.top = "0";
+  modalElement.style.left = "0";
+  modalElement.style.display = "flex";
+  modalElement.style.justifyContent = "center";
+  modalElement.style.alignItems = "center";
+
+  const cardElement = document.createElement("div");
+  cardElement.style.height = "500px";
+  cardElement.style.width = "500px";
+  cardElement.style.backgroundColor = "#FFA477";
+
+  // Agregar título "Posiciones de Jugadores"
+  const titleElement = document.createElement("h1");
+  titleElement.textContent = "Posiciones de Jugadores";
+  titleElement.style.textAlign = "center";
+  titleElement.style.color = "#FFFFFF";
+  cardElement.appendChild(titleElement);
+
+  modalElement.appendChild(cardElement);
+
+  for (const player of playerRanking) {
+    const currentElement = document.createElement("div");
+    currentElement.innerHTML = player;
+    currentElement.style.fontFamily = "Arial, sans-serif"; // Agregar fontFamily
+    cardElement.appendChild(currentElement);
+  }
+
+  const closeButtonContainer = document.createElement("div");
+  closeButtonContainer.style.display = "flex";
+  closeButtonContainer.style.justifyContent = "center";
+  closeButtonContainer.style.alignItems = "center";
+  closeButtonContainer.style.marginTop = "auto"; // Alinear al final de la tarjeta
+  cardElement.appendChild(closeButtonContainer);
+
+  const closeButton = document.createElement("button");
+  closeButton.innerHTML = "Cerrar";
+  closeButton.style.fontFamily = "Arial, sans-serif"; // Agregar fontFamily
+  closeButton.addEventListener("click", () => {
+    console.log("click en cerrar");
+    document.getElementsByClassName("global-modal")[0].remove();
+  });
+  closeButtonContainer.appendChild(closeButton);
+  modalElement.appendChild(cardElement);
+  document.body.appendChild(modalElement);
 });
 
 socket.on("newScore", function (data) {
   document.getElementById("scoreText").innerHTML = "Score: " + data;
   // console.log(data);
 });
-socket.on("newTable", function (currentRound) {
+socket.on("newTable", function (currentRound, initialTime) {
+  updateTimer(initialTime);
+  document.getElementById(
+    "rankText"
+  ).innerHTML = `Probabilidad de bancarrota: ${
+    currentRound.bankRuptProbability * 100
+  }%`;
   // Crea la tabla con las clases de Bootstrap
   var tablaComparaciones = document.createElement("table");
   tablaComparaciones.classList.add("table", "table-striped", "table-bordered");
@@ -139,7 +211,7 @@ socket.on("newTable", function (currentRound) {
 
   // Crea un div contenedor para la tabla
   var tablaContainer = document.createElement("div");
-  tablaContainer.classList.add("container", "my-5");
+  tablaContainer.classList.add("container_comparaciones", "my-5");
   tablaContainer.appendChild(tituloTabla);
   tablaContainer.appendChild(tablaComparaciones);
 
@@ -250,14 +322,15 @@ socket.on("newTable", function (currentRound) {
   tablaInvestDiv.appendChild(tablaInvest);
   //////////////////////////////////////////////////////////////////////////
   var tablaPayments = document.createElement("table");
-  tablaPayments.classList.add("table");
+  tablaPayments.classList.add("table", "table-striped", "table-bordered");
 
   // Crea una fila para los encabezados de la tabla de payments
   var headerRowPayments = document.createElement("tr");
-  headerRowPayments.classList.add("table-header");
+  headerRowPayments.classList.add("table-primary");
 
   // Crea un encabezado para la primera columna de la tabla de payments
   var firstHeaderPayments = document.createElement("th");
+  firstHeaderPayments.classList.add("text-center");
   firstHeaderPayments.textContent = "Ganancias/Perdidas";
   headerRowPayments.appendChild(firstHeaderPayments);
 
@@ -358,7 +431,8 @@ socket.on("hostDisconnect", function () {
 socket.on("playerGameData", function (data) {
   for (var i = 0; i < data.length; i++) {
     if (data[i].playerId == socket.id) {
-      document.getElementById("nameText").innerHTML = "Name: " + data[i].name;
+      document.getElementById("nameText").innerHTML = "Nombre: " + data[i].name;
+      // document.getElementById("nameText").innerHTML = "Nombre: " + data[i].;
       document.getElementById("scoreText").innerHTML =
         "Score: " + data[i].gameData.score;
     }
