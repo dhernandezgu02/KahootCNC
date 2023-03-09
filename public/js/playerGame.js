@@ -75,11 +75,11 @@ socket.on("questionOver", function (data, _, playerRanking) {
   if (!isBankRupt) {
     document.body.style.backgroundColor = "#4CAF50";
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "No hay bancarota!";
+    document.getElementById("message").innerHTML = "No hay bancarrota!";
   } else {
     document.body.style.backgroundColor = "#f94a1e";
     document.getElementById("message").style.display = "block";
-    document.getElementById("message").innerHTML = "Hay bancarota!";
+    document.getElementById("message").innerHTML = "Hay bancarrota!";
   }
   document.getElementById("answer0").style.visibility = "hidden";
   document.getElementById("answer1").style.visibility = "hidden";
@@ -420,6 +420,7 @@ socket.on("nextQuestionPlayer", function (currentRound) {
   document.getElementById("answer3").style.visibility = "visible";
   document.getElementById("answer4").style.visibility = "visible";
   document.getElementById("answer5").style.visibility = "visible";
+  document.getElementById("answer5").style.visibility = "visible";
   document.getElementById("message").style.display = "none";
   document.body.style.backgroundColor = "white";
 });
@@ -450,6 +451,8 @@ socket.on("GameOver", function () {
   document.getElementById("tablaComparaciones").style.visibility = "hidden";
   document.getElementById("tablaInvest").style.visibility = "hidden";
   document.getElementById("tablaPayments").style.visibility = "hidden";
+  document.getElementById("table-container").style.visibility = "hidden";
+  // document.getElementByClassName("div_buttons").style.visibility = "hidden";
   document.getElementById("message").style.display = "block";
   document.getElementById("message").innerHTML = "GAME OVER";
 });
